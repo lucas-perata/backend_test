@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
@@ -37,12 +39,11 @@ gem 'bootsnap', require: false
 # gem "rack-cors"
 
 # Extra Gems
+gem 'httparty'
 gem 'jsonapi-serializer', '~> 2.2'
 gem 'rack-cors', '~> 1.1', '>= 1.1.1'
 gem 'rswag'
 gem 'rubocop-rails', require: false
-gem "httparty"
-
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
