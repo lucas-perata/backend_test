@@ -7,15 +7,19 @@ module Api
 
       def index
         @clients = Client.all
-        render json: ClientsSerializer.new(@clients)
+        render json: @clients
       end
 
       def show
-        render json: TransactionSerializer.new(@client.transactions.order(:status))
+        render json: @client.transactions
       end
 
       def payments
-        render json: HeaderSerializer.new(@client.header)
+        options = {
+          include: [:header]
+        }
+        footer = @client.footer
+        render json: footer.to_json(:include => [:header])
       end
 
       private
