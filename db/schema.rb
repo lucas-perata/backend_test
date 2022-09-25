@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_09_25_142003) do
+ActiveRecord::Schema[7.0].define(version: 2022_09_25_155437) do
   create_table "clients", force: :cascade do |t|
     t.string "client_id", null: false
     t.string "first_name"
@@ -43,7 +43,9 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_25_142003) do
     t.integer "total_with_discounts"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "footer_id"
     t.index ["client_id"], name: "index_headers_on_client_id"
+    t.index ["footer_id"], name: "index_headers_on_footer_id"
   end
 
   create_table "transactions", force: :cascade do |t|
@@ -59,5 +61,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_25_142003) do
 
   add_foreign_key "footers", "clients"
   add_foreign_key "headers", "clients"
+  add_foreign_key "headers", "footers"
   add_foreign_key "transactions", "clients"
 end
