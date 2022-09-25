@@ -6,6 +6,9 @@ Rails.application.routes.draw do
   namespace :api, defaults: { format: :json } do
     namespace :v1 do
       resources :filter
+      get '/clients/' => 'clients#index', as: :index
+      get '/clients/:id' => 'clients#show', as: :show
+      get '/clients/:id/payments' => 'clients#payments', as: :payments
     end
   end
 end
