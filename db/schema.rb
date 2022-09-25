@@ -11,6 +11,9 @@
 # It's strongly recommended that you check this file into your version control system.
 
 ActiveRecord::Schema[7.0].define(version: 2022_09_25_155437) do
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "clients", force: :cascade do |t|
     t.string "client_id", null: false
     t.string "first_name"
@@ -25,7 +28,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_25_155437) do
   end
 
   create_table "footers", force: :cascade do |t|
-    t.integer "client_id", null: false
+    t.bigint "client_id", null: false
     t.string "reserved"
     t.date "payment_date"
     t.datetime "created_at", null: false
@@ -34,7 +37,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_25_155437) do
   end
 
   create_table "headers", force: :cascade do |t|
-    t.integer "client_id", null: false
+    t.bigint "client_id", null: false
     t.string "payment_id"
     t.string "reserved"
     t.integer "currency"
@@ -43,13 +46,13 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_25_155437) do
     t.integer "total_with_discounts"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "footer_id"
+    t.bigint "footer_id"
     t.index ["client_id"], name: "index_headers_on_client_id"
     t.index ["footer_id"], name: "index_headers_on_footer_id"
   end
 
   create_table "transactions", force: :cascade do |t|
-    t.integer "client_id", null: false
+    t.bigint "client_id", null: false
     t.string "transaction_id", null: false
     t.integer "amount"
     t.string "reserved"
