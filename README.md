@@ -1,24 +1,24 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Cómo utilizar la API 
 
-Things you may want to cover:
+Para
 
-* Ruby version
+## Decisiones y consideraciones 
 
-* System dependencies
+Cuando comencé este proyecto me sentí totalmente intimiadado por las miles de lineas del file.txt, ya que nunca me había enfrentado a algo similar. Aunque me cueste admitirlo, tardé unos días en poder entender exactamente lo que tenía que hacer. Comencé realizando diagramas y pseudocódigo. Comencé filtrando la información en tablas sin distinción del tipo de dato. Luego me di cuenta que sería más eficiente filtrar desde la última línea, el footer, ya que otorga el Client Id. Cuando logré crear el algoritmo capaz de leer de abajo hacia arriba, tan solo tuve que crear los métodos y poner la API en funcionamiento. 
 
-* Configuration
+### Gemas utilizadas
 
-* Database creation
+* Swagger: para documentar los endpoints fácilmente. 
+* Rubocop: para mantener el código organizado y respetando las buenas prácticas del lenguaje. 
+* Faker: para rellenar los campos de los clients y darle una sensación más realista a la API.
+* Figaro: para guardar la KEY de la API de Increase y no subirla a Github. 
+* HTTParty: para realizar la comunicación con la API de Increase. Elegí esta entre otras gems debido a que se mantiene actualizada. 
+* JSON API serializer: para manipular la información que muestra la API en formato JSON. 
 
-* Database initialization
+## Mejoras 
 
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+* Agregar FRONTEND con views en RoR o una librería externa como React.js. Así aumentaría la accesibilidad a la API. 
+* Mejorar y optimizar el código así como las relaciones en la base de datos.
+* Autentificación basada en JWT. Había pensado en agregarle, pero lo dejé de lado por una cuestión de tiempo y porque la API de Increase ya contaba con un método para autentificar los pedidos.
