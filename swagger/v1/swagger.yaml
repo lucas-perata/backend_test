@@ -1,0 +1,55 @@
+---
+openapi: 3.0.1
+info:
+  title: API V1
+  version: v1
+paths:
+  "/api/v1/clients":
+    get:
+      summary: Get All Clients
+      tags:
+      - Clients
+      responses:
+        '200':
+          description: succesful
+  "/api/v1/clients/{id}":
+    get:
+      summary: Get One Client Transactions
+      tags:
+      - Clients
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: succesful
+  "/api/v1/clients/{id}/payments":
+    get:
+      summary: Get One Client Payment date and Payment amount
+      tags:
+      - Clients
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: succesful
+  "/api/v1/load":
+    get:
+      summary: Get All Data from INCREASE API
+      tags:
+      - Data
+      responses:
+        '204':
+          description: succesful
+servers:
+- url: http://{defaultHost}
+  variables:
+    defaultHost:
+      default: localhost:3000
