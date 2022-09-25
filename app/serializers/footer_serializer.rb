@@ -2,5 +2,6 @@
 
 class FooterSerializer
   include JSONAPI::Serializer
-  attributes
+  attributes :payment_date
+  has_one :header
 end
