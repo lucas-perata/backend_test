@@ -27,13 +27,11 @@ module Api
         b = 0
 
         while n > b && @@count < 6
-          # Clients filter
           filter_line = r[n - 1]
 
           if r[n - 1][0].to_i === 4
             get_client(filter_line[24..55])
             new_footer(filter_line[16..23])
-          # Header Filter
           elsif r[n - 1][0].to_i === 2
             new_transaction(filter_line[1..32], filter_line[33..46], filter_line[51])
           elsif r[n - 1][0].to_i === 1
@@ -82,7 +80,6 @@ module Api
           parsed_response = JSON.parse(response_body)
           puts parsed_response
           new_client(parsed_response)
-          nil
         elsif response.code == 500 && @@count < 6
           puts 'Error server: waiting to do the request again'
           @@count += 1
@@ -91,7 +88,7 @@ module Api
           get_client(client_id)
         elsif response.code == 500 && @@count == 6
           puts 'Stopping the requests'
-          nil
+          return
         end
       end
     end
