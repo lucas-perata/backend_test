@@ -19,7 +19,7 @@ module Api
           include: [:header]
         }
         footer = @client.footer
-        render json: footer.to_json(:include => [:header])
+        render json: footer.to_json(include: [:header])
       end
 
       private

@@ -3,23 +3,21 @@
 module Api
   module V1
     class FilterController < ApplicationController
-
-      @@count = 0 
+      @@count = 0
 
       def load
         response = HTTParty.get('https://increase-transactions.herokuapp.com/file.txt',
                                 headers: { 'Authorization' => ENV['API_KEY'] })
-        if response.code == 200 
+        if response.code == 200
           filter_request(response)
-        elsif response.code == 500 && @@count < 2 
-          sleep 2 
-          puts "Trying again"
+        elsif response.code == 500 && @@count < 2
+          sleep 2
+          puts 'Trying again'
           @@count += 1
-          load   
-        elsif response.code == 500 && @@count == 3 
-          render json: { error: "Cannot reach API" }.to_json
-        end 
-      
+          load
+        elsif response.code == 500 && @@count == 3
+          render json: { error: 'Cannot reach API' }.to_json
+        end
       end
 
       def filter_request(response)
@@ -28,7 +26,7 @@ module Api
         n = r.count
         b = 0
 
-        while n > b && @@count < 6 do 
+        while n > b && @@count < 6
           # Clients filter
           filter_line = r[n - 1]
 
@@ -39,25 +37,25 @@ module Api
           elsif r[n - 1][0].to_i === 2
             new_transaction(filter_line[1..32], filter_line[33..46], filter_line[51])
           elsif r[n - 1][0].to_i === 1
-           new_header(filter_line[1..32], filter_line[36..38], filter_line[39..51], filter_line[52..64], filter_line[65..77])
-          else
-            #puts 'Table'
+            new_header(filter_line[1..32], filter_line[36..38], filter_line[39..51], filter_line[52..64],
+                       filter_line[65..77])
           end
           n -= 1
         end
-      end 
+      end
 
       def new_client(response)
-        id = response["id"] 
-        email = response["email"]
-        first_name = response["first_name"]
-        last_name = response["last_name"]
-        job = response["job"]
-        address = response["address"]
-        zip_code = response["zip_code"]
-        phone = response["phone"]
+        id = response['id']
+        email = response['email']
+        first_name = response['first_name']
+        last_name = response['last_name']
+        job = response['job']
+        address = response['address']
+        zip_code = response['zip_code']
+        phone = response['phone']
 
-        Client.create(client_id: id, first_name: first_name, last_name: last_name, email: email, job: job, address: address, zip_code: zip_code, phone: phone)
+        Client.create(client_id: id, first_name: first_name, last_name: last_name, email: email, job: job,
+                      address: address, zip_code: zip_code, phone: phone)
       end
 
       def new_transaction(id, amount, type)
@@ -75,30 +73,27 @@ module Api
 
       def get_client(id)
         client_id = id
-        response = HTTParty.get('https://increase-transactions.herokuapp.com/clients/' + client_id,
-          headers: { 'Authorization' => ENV['API_KEY'] })
+        response = HTTParty.get("https://increase-transactions.herokuapp.com/clients/#{client_id}",
+                                headers: { 'Authorization' => ENV['API_KEY'] })
 
-            if response.code == 200
-              puts id
-              response_body = response.body
-              parsed_response = JSON.parse(response_body)
-              puts parsed_response
-              new_client(parsed_response)
-              return 
-            elsif response.code == 500 && @@count < 6
-              puts "Error server: waiting to do the request again" 
-              @@count = @@count + 1 
-              sleep 1
-              puts "Trying again"
-              get_client(client_id)
-            elsif response.code == 500 && @@count == 6
-              puts "Stopping the requests"
-              return
-          end 
-      end 
-
-     
-
+        if response.code == 200
+          puts id
+          response_body = response.body
+          parsed_response = JSON.parse(response_body)
+          puts parsed_response
+          new_client(parsed_response)
+          nil
+        elsif response.code == 500 && @@count < 6
+          puts 'Error server: waiting to do the request again'
+          @@count += 1
+          sleep 1
+          puts 'Trying again'
+          get_client(client_id)
+        elsif response.code == 500 && @@count == 6
+          puts 'Stopping the requests'
+          nil
+        end
+      end
     end
   end
 end

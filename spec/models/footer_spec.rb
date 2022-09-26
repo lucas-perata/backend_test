@@ -2,16 +2,16 @@
 
 require 'rails_helper'
 
-RSpec.describe Footer, :type => :model do
-  let(:client) { Client.create(client_id: "Anything") }
-  subject {
+RSpec.describe Footer, type: :model do
+  let(:client) { Client.create(client_id: 'Anything') }
+  subject do
     described_class.new(client_id: client.id)
-  }
-  it "is valid with valid attributes" do
+  end
+  it 'is valid with valid attributes' do
     expect(subject).to be_valid
   end
 
-  it "is not valid without a client_id" do
+  it 'is not valid without a client_id' do
     subject.client_id = nil
     expect(subject).to_not be_valid
   end
