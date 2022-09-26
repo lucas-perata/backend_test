@@ -51,3 +51,4 @@ Otra de las dificultades que encontré fue que la API de Increase no permite rea
 - Mejorar el manejo de errores debido a que la API provista por Increase(https://increase-transactions.herokuapp.com/) falla luego de múltiples pedidos para obtener la información de los clientes. Por el momento dejé un sistema basado en cantidad de veces en que responde con código 500 para que no continúe intentando y pueda cerrar el proceso.
 - Agregar GRAPHQL para mejorar las request a la API.
 - Implementar Docker.
+- Automatizar los pedidos a la API. Implementar una función que cada 10 minutos realice un pedido así llena la DB con la información. Junto con esto se puede implementar una función que analice si el documento es exactamente el mismo para evitar duplicaciones.
