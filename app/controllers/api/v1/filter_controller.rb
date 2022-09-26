@@ -17,7 +17,7 @@ module Api
           @@count += 1
           load   
         elsif response.code == 500 && @@count == 3 
-          render json: { message: response.code }
+          render json: { error: "Cannot reach API" }.to_json
         end 
       
       end
@@ -34,13 +34,12 @@ module Api
 
           if r[n - 1][0].to_i === 4
             get_client(filter_line[24..55])
-            #Client.create(client_id: filter_line[24..55])
             new_footer(filter_line[16..23])
           # Header Filter
           elsif r[n - 1][0].to_i === 2
             new_transaction(filter_line[1..32], filter_line[33..46], filter_line[51])
           elsif r[n - 1][0].to_i === 1
-           new_header(filter_line[1..32], filter_line[35..38], filter_line[39..51], filter_line[52..64], filter_line[65..78])
+           new_header(filter_line[1..32], filter_line[36..38], filter_line[39..51], filter_line[52..64], filter_line[65..77])
           else
             #puts 'Table'
           end
@@ -81,7 +80,6 @@ module Api
 
             if response.code == 200
               puts id
-              sleep 1
               response_body = response.body
               parsed_response = JSON.parse(response_body)
               puts parsed_response
@@ -90,14 +88,11 @@ module Api
             elsif response.code == 500 && @@count < 6
               puts "Error server: waiting to do the request again" 
               @@count = @@count + 1 
-              puts @@count  
-              sleep 4
+              sleep 1
               puts "Trying again"
               get_client(client_id)
             elsif response.code == 500 && @@count == 6
-              puts "hola"
-              puts @@count 
-              sleep 2 
+              puts "Stopping the requests"
               return
           end 
       end 
