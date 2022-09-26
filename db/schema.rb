@@ -42,13 +42,13 @@ ActiveRecord::Schema[7.0].define(version: 20_220_925_155_437) do
     t.bigint 'client_id', null: false
     t.string 'payment_id'
     t.string 'reserved'
-    t.string 'currency'
+    t.integer 'currency'
+    t.integer 'total'
     t.integer 'discounts'
     t.integer 'total_with_discounts'
     t.datetime 'created_at', null: false
     t.datetime 'updated_at', null: false
     t.bigint 'footer_id'
-    t.integer 'total'
     t.index ['client_id'], name: 'index_headers_on_client_id'
     t.index ['footer_id'], name: 'index_headers_on_footer_id'
   end
