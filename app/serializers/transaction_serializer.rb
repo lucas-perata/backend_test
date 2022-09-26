@@ -2,5 +2,5 @@
 
 class TransactionSerializer
   include JSONAPI::Serializer
-  attributes :amount, :status
+  attributes :transaction_id, :amount, :status
 end
