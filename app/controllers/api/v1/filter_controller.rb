@@ -16,7 +16,8 @@ module Api
           @@count += 1
           load
         elsif response.code == 500 && @@count == 3
-          render json: { error: 'Cannot reach API' }.to_json
+          puts "Cannot reach API"
+          sleep 1 
         end
       end
 
