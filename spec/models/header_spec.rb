@@ -12,7 +12,7 @@ RSpec.describe Header, :type => :model do
     expect(subject).to be_valid
   end
 
-  it "is not valid without a title" do
+  it "is not valid without a client_id" do
     subject.client_id = nil
     expect(subject).to_not be_valid
   end
