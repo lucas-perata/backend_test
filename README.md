@@ -48,7 +48,7 @@ Utilicé sleeps en el código también para obtener la mayor cantidad de info po
 
 - Swagger: para documentar los endpoints fácilmente.
 - Rubocop: para mantener el código organizado y respetando las buenas prácticas del lenguaje.
-- Figaro: para guardar la KEY de la API de Increase y no subirla a Github.
+- Figaro: para guardar la KEY de la API de Increase. Sin embargo, opté por no utilizarla para facilitar el proceso de clonado para probar la API en local.
 - HTTParty: para realizar la comunicación con la API de Increase. Elegí esta entre otras gems debido a que se mantiene actualizada.
 - JSON API serializer: para manipular la información que muestra la API en formato JSON.
 - Pry: para debuggear con mayor facilidad.
