@@ -1,20 +1,26 @@
 # API INCREASE BACKEND 
 
-## Cómo utilizar la API
+## Clonar repositorio
 
 - Primer paso: git clone
 - Segundo paso: cd a la carpeta
 - Tercer paso: rails db:create y rails db:migrate
 - Cuartor paso: rails s
 
+## Utilizar la versión en Heroku 
+
+- https://fathomless-caverns-50562.herokuapp.com/api-docs/index.html
+
+Desde ese link se pueden probar los endpoints de la API.
+
 ### Versiones
 
 - Ruby 3.0.3
 - Rails 7.0.3.1
 
-## Documentación y tests
+## Endpoints y tests para repositorio clonado
 
-La API fue documentada en SWAGGER. Para acceder es necesario levantar el server con rails s y dirigirse a la URL: http://localhost:3000/api-docs/
+Dejo especificados los endpoints levantando un server localhost:3000. Además dejo los comandos para correr los tests.
 
 ### Endpoints
 
@@ -36,7 +42,7 @@ Luego me di cuenta que sería más eficiente filtrar desde la última línea, el
 
 Otra de las dificultades que encontré fue que la API de Increase no permite realizar las cientos de request necesarias para obtener toda la información de los clientes. Por lo que tuve que programar la función de manera tal que dejé de ejecutarse luego de X intentos. En este caso opté por tomar la información que provee únicamente que serían unos 19 clients sin dar error. La alternativa era solo tomar los ID de los clients y construir la tabla sin información personal. De esta manera, la API no daba error 500 porque solo se hacia una request del file.txt.
 
-Utilicé sleeps en el código también para obtener la mayor cantidad de info posible sin que diera error. Se sacrifica el rendimiento pero se gana en funcionalidad. Luego implementé algunos tests básicos de los modelos y de las requests.
+Utilicé sleeps en el código también para obtener la mayor cantidad de info posible sin que diera error. Se sacrifica el rendimiento pero se gana en funcionalidad. Luego implementé algunos tests básicos de los modelos y de las requests de acuerdo me alcanzó el tiempo.
 
 ### Gemas utilizadas
 
@@ -52,9 +58,8 @@ Utilicé sleeps en el código también para obtener la mayor cantidad de info po
 ## Mejoras
 
 - Agregar FRONTEND con views en RoR o una librería externa como React.js. Así aumentaría la accesibilidad a la API.
-- Mejorar y optimizar el código así como las relaciones en la base de datos además de extender los tests para cubrir todos los errores posibles.
+- Mejorar y optimizar el código así como las relaciones en la base de datos además de extender los tests para cubrir todos los errores posibles. Testing de relaciones en DB con la GEM shoulda-matchers. No seguí TDD estrictamente por la limitación de tiempo.
 - Autentificación basada en JWT. Había pensado en agregarle, pero lo dejé de lado por una cuestión de tiempo y porque la API de Increase ya contaba con un método para autentificar los pedidos.
 - Mejorar el manejo de errores debido a que la API provista por Increase(https://increase-transactions.herokuapp.com/) falla luego de múltiples pedidos para obtener la información de los clientes. Por el momento dejé un sistema basado en cantidad de veces en que responde con código 500 para que no continúe intentando y pueda cerrar el proceso.
 - Agregar GRAPHQL para mejorar las request a la API.
 - Automatizar los pedidos a la API. Implementar una función que cada 10 minutos realice un pedido así llena la DB con la información. Junto con esto se puede implementar una función que analice si el documento es exactamente el mismo para evitar duplicaciones.
-- Testing de relaciones en DB con la GEM shoulda-matchers
