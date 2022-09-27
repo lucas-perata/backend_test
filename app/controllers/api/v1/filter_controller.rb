@@ -7,7 +7,7 @@ module Api
 
       def load
         response = HTTParty.get('https://increase-transactions.herokuapp.com/file.txt',
-                                headers: { 'Authorization' => ENV['API_KEY'] })
+                                headers: { 'Authorization' => 'Bearer 1234567890qwertyuiopasdfghjklzxcvbnm' })
         if response.code == 200
           filter_request(response)
         elsif response.code == 500 && @@count < 2
@@ -73,7 +73,7 @@ module Api
       def get_client(id)
         client_id = id
         response = HTTParty.get("https://increase-transactions.herokuapp.com/clients/#{client_id}",
-                                headers: { 'Authorization' => ENV['API_KEY'] })
+                                headers: { 'Authorization' => 'Bearer 1234567890qwertyuiopasdfghjklzxcvbnm' })
 
         if response.code == 200
           puts id
