@@ -1,17 +1,17 @@
 # API INCREASE BACKEND 
 
+## Utilizar la versión en Heroku 
+
+- https://fathomless-caverns-50562.herokuapp.com/api-docs/index.html
+
+Desde ese link se pueden probar los endpoints de la API.
+
 ## Clonar repositorio
 
 - Primer paso: git clone
 - Segundo paso: cd a la carpeta
 - Tercer paso: rails db:create y rails db:migrate
 - Cuartor paso: rails s
-
-## Utilizar la versión en Heroku 
-
-- https://fathomless-caverns-50562.herokuapp.com/api-docs/index.html
-
-Desde ese link se pueden probar los endpoints de la API.
 
 ### Versiones
 
